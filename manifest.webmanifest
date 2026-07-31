@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "Fundaciones · Clase 1: Esfuerzos verticales",
+  "short_name": "Fundaciones",
+  "description": "Laboratorio interactivo sobre carga, área, peso propio, estratificación y sobrecarga en el suelo.",
+  "lang": "es-CO",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "landscape-primary",
+  "background_color": "#03101b",
+  "theme_color": "#041321",
+  "categories": ["education", "engineering"],
+  "icons": [
+    {"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
+    {"src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}
+  ]
+}

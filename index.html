@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#041321">
+  <meta name="description" content="Laboratorio interactivo sobre esfuerzos verticales en el suelo para Fundaciones.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icon-192.png">
+  <link rel="icon" href="assets/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Fundaciones · Clase 1</title>
+</head>
+<body>
+<div class="app-shell" id="appShell">
+  <aside class="sidebar" id="sidebar" aria-label="Navegación de la clase">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">F</div>
+      <div class="brand-copy"><strong>FUNDACIONES</strong><span>INGENIERÍA CIVIL</span></div>
+      <button class="icon-btn sidebar-close" id="sidebarClose" aria-label="Cerrar menú">×</button>
+    </div>
+
+    <div class="class-label">CLASE 1</div>
+    <nav id="sideNav"></nav>
+
+    <div class="sidebar-bottom">
+      <div class="tip-card"><span class="tip-icon">◉</span><div><b>TIP</b><p>Modifica los controles y relaciona el número con lo que ocurre físicamente en el suelo.</p></div></div>
+      <div class="progress-card"><span>PROGRESO DE LA CLASE</span><strong id="progressText">1 / 7</strong><div class="progress-track"><i id="progressFill"></i></div></div>
+    </div>
+  </aside>
+  <button class="sidebar-backdrop" id="sidebarBackdrop" aria-label="Cerrar menú"></button>
+
+  <header class="topbar">
+    <button class="icon-btn menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
+    <div class="topbar-title">
+      <div class="breadcrumb"><b>CLASE 1</b><span>›</span><span id="breadcrumbTitle">Introducción</span></div>
+      <h1 id="screenTitle">Esfuerzos verticales en el suelo</h1>
+      <p id="screenSubtitle">Peso propio y cargas aplicadas</p>
+    </div>
+    <div class="topbar-actions">
+      <div class="status-pill" id="onlineStatus"><span></span>En línea</div>
+      <button class="action-btn" id="objectivesBtn"><span>◎</span>Objetivos</button>
+      <button class="action-btn" id="guideBtn"><span>▤</span>Guía docente</button>
+      <button class="action-btn install-btn" id="installBtn" hidden><span>⇩</span>Instalar</button>
+      <button class="icon-btn" id="fullBtn" aria-label="Pantalla completa">⛶</button>
+    </div>
+  </header>
+
+  <main class="stage" id="stage">
+    <!-- 1. INTRODUCCIÓN -->
+    <section class="screen active" data-screen="0" aria-labelledby="introHeading">
+      <div class="intro-layout">
+        <article class="hero-card">
+          <img src="assets/intro-foundation-v9.png" width="1536" height="1024" alt="Edificación sobre una cimentación y representación del flujo de esfuerzos en el terreno">
+          <div class="hero-overlay"></div>
+          <div class="hero-content">
+            <span class="section-kicker">1. INTRODUCCIÓN</span>
+            <h2 id="introHeading">¿Qué ocurre bajo una edificación?</h2>
+            <p>Aunque la estructura esté en reposo, su peso se transmite a la cimentación y luego al terreno.</p>
+          </div>
+          <div class="hero-note"><span class="note-icon">i</span><div><strong>Equilibrio ≠ ausencia de fuerzas</strong><p>Las fuerzas se compensan, pero continúan actuando.</p></div></div>
+          <svg class="hero-force-overlay" id="heroForceOverlay" viewBox="0 0 1536 1024" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs>
+              <linearGradient id="beamGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#fff6a1" stop-opacity=".25"/>
+                <stop offset=".48" stop-color="#ffc23d" stop-opacity="1"/>
+                <stop offset="1" stop-color="#ff6d00" stop-opacity=".88"/>
+              </linearGradient>
+              <radialGradient id="soilPulse" cx="50%" cy="20%" r="78%">
+                <stop offset="0" stop-color="#ffb42c" stop-opacity=".48"/>
+                <stop offset=".38" stop-color="#ff7a00" stop-opacity=".22"/>
+                <stop offset="1" stop-color="#ff5a00" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="beamGlow" x="-80%" y="-30%" width="260%" height="180%">
+                <feGaussianBlur stdDeviation="11" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+              <marker id="beamArrow" markerWidth="18" markerHeight="18" refX="9" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+                <path d="M1 1 L17 9 L1 17 Z" fill="#ff8a00"/>
+              </marker>
+            </defs>
+            <ellipse class="soil-energy-pulse" cx="902" cy="824" rx="285" ry="170" fill="url(#soilPulse)"/>
+            <g class="building-load-beams" fill="none" stroke="url(#beamGradient)" stroke-linecap="round">
+              <path class="load-beam beam-a" d="M880 150 L880 668" marker-end="url(#beamArrow)"/>
+              <path class="load-beam beam-b" d="M930 135 L930 675" marker-end="url(#beamArrow)"/>
+              <path class="load-beam beam-c" d="M980 175 L980 672" marker-end="url(#beamArrow)"/>
+            </g>
+            <g class="foundation-pulses" fill="none" stroke="url(#beamGradient)" stroke-linecap="round" marker-end="url(#beamArrow)">
+              <path d="M752 696 L752 798"/>
+              <path d="M802 696 L802 818"/>
+              <path d="M852 696 L852 836"/>
+              <path d="M902 696 L902 850"/>
+              <path d="M952 696 L952 836"/>
+              <path d="M1002 696 L1002 818"/>
+              <path d="M1052 696 L1052 798"/>
+            </g>
+          </svg>
+          <button id="animateBtn" class="play-btn"><span>▶</span> Animar transmisión</button>
+        </article>
+
+        <aside class="intro-panel">
+          <div class="glass-card formula-card">
+            <div class="card-heading"><span>RELACIÓN BÁSICA</span><button class="help-dot" data-help="La carga P dividida entre el área de contacto A produce el esfuerzo promedio σ.">?</button></div>
+            <div class="formula-wrap"><div class="formula-main">σ = <span>P</span>/<span>A</span></div><div class="symbol-list"><p><b>σ</b> Esfuerzo (kPa)</p><p><b>P</b> Carga (kN)</p><p><b>A</b> Área (m²)</p></div></div>
+          </div>
+
+          <div class="glass-card control-card compact-controls">
+            <div class="control-row">
+              <label for="p">Carga P <output id="pOut">600 kN</output></label>
+              <input id="p" type="range" min="100" max="1200" step="50" value="600">
+              <div class="range-extremes"><span>100</span><span>1200 kN</span></div>
+            </div>
+            <div class="control-row">
+              <label for="a">Área A <output id="aOut">6.0 m²</output></label>
+              <input id="a" type="range" min="1" max="12" step=".5" value="6">
+              <div class="range-extremes"><span>1</span><span>12 m²</span></div>
+            </div>
+          </div>
+
+          <div class="glass-card result-card">
+            <div><span>ESFUERZO RESULTANTE</span><strong id="stressOut">100.0 kPa</strong></div>
+            <p id="stressMsg">Carga y área actúan conjuntamente.</p>
+          </div>
+
+          <div class="glass-card stress-map-card">
+            <div class="card-heading"><span>DISTRIBUCIÓN BAJO LA ZAPATA</span><small id="mapScale">100 kPa</small></div>
+            <svg id="dynamicStressMap" viewBox="0 0 520 260" role="img" aria-label="Distribución dinámica del esfuerzo bajo una zapata">
+              <defs>
+                <linearGradient id="soilGround" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#81583b"/><stop offset="1" stop-color="#2b1a14"/></linearGradient>
+                <filter id="soilNoise"><feTurbulence type="fractalNoise" baseFrequency=".62" numOctaves="3" seed="8"/><feColorMatrix values=".4 0 0 0 .22 0 .3 0 0 .14 0 0 .2 0 .09 0 0 0 .35 0"/></filter>
+                <linearGradient id="heatLegend" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2758c7"/><stop offset=".25" stop-color="#25a174"/><stop offset=".5" stop-color="#e5c341"/><stop offset=".72" stop-color="#ef7d2e"/><stop offset="1" stop-color="#dc3536"/></linearGradient>
+              </defs>
+              <rect x="12" y="76" width="458" height="166" rx="14" fill="url(#soilGround)"/>
+              <rect x="12" y="76" width="458" height="166" rx="14" filter="url(#soilNoise)" opacity=".45"/>
+              <g id="dynHeat"></g>
+              <g id="dynContours" fill="none" stroke-linecap="round"></g>
+              <g id="dynArrows"></g>
+              <rect id="dynFooting" x="132" y="34" width="220" height="50" rx="7" fill="#c7d1d8"/>
+              <rect id="dynPedestal" x="206" y="10" width="72" height="28" rx="5" fill="#aebcc6"/>
+              <rect x="486" y="88" width="12" height="130" rx="6" fill="url(#heatLegend)"/>
+              <text x="504" y="96" fill="#dcebf4" font-size="12">Mayor</text><text x="504" y="217" fill="#dcebf4" font-size="12">Menor</text>
+            </svg>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 2. CARGA, ÁREA Y ESFUERZO -->
+    <section class="screen" data-screen="1" aria-labelledby="paHeading">
+      <div class="explore-layout">
+        <div class="explore-main">
+          <article class="visual-story-card building-story">
+            <img src="assets/intro-foundation-v9.png" alt="Edificación y cimentación para explorar carga y área">
+            <div class="visual-story-shade"></div>
+            <div class="visual-story-copy">
+              <span class="section-kicker">EXPLORACIÓN INTERACTIVA</span>
+              <h2 id="paHeading">Explora el efecto de la carga y el área</h2>
+              <p>La misma carga puede producir esfuerzos muy distintos según el tamaño de la zapata.</p>
+            </div>
+            <div class="floating-formula"><span>FÓRMULA CLAVE</span><strong>σ = P/A</strong><small>Esfuerzo promedio de contacto</small></div>
+            <div class="story-insight"><span>i</span><p><b>Idea física:</b> una zapata más amplia distribuye la carga en una superficie mayor.</p></div>
+          </article>
+
+          <section class="examples-strip" aria-label="Ejemplos rápidos de carga y área">
+            <div class="strip-heading"><div><span>EJEMPLOS GUIADOS</span><p>Compara cuatro situaciones reales.</p></div><button id="openExamplesBtn" class="text-btn">Ver todos →</button></div>
+            <div class="example-mini-grid" id="paExamples"></div>
+          </section>
+        </div>
+
+        <aside class="explore-side">
+          <div class="glass-card">
+            <div class="card-heading"><span>CONTROLES</span><small>Modifica y compara</small></div>
+            <div class="control-row"><label for="p2">Carga P <output id="pOut2">600 kN</output></label><input id="p2" type="range" min="100" max="1600" step="50" value="600"><div class="range-extremes"><span>100</span><span>1600 kN</span></div></div>
+            <div class="control-row"><label for="a2">Área A <output id="aOut2">6.0 m²</output></label><input id="a2" type="range" min="1" max="20" step=".5" value="6"><div class="range-extremes"><span>1</span><span>20 m²</span></div></div>
+            <div class="metric-pair"><div><small>TIPO DE ZAPATA</small><strong id="footingWidthText">Área media</strong></div><div><small>INTENSIDAD</small><strong id="stressLevelText">Alta</strong></div></div>
+          </div>
+          <div class="glass-card result-card horizontal"><div><span>ESFUERZO RESULTANTE</span><strong id="stressOut2">100.0 kPa</strong></div><p id="paInterpretation">Cada metro cuadrado recibe 100 kN.</p></div>
+          <div class="glass-card chart-panel"><div class="card-heading"><span>GRÁFICA ESFUERZO–ÁREA</span><small>P constante</small></div><svg id="chartPA" viewBox="0 0 720 390" aria-label="Relación entre área de zapata y esfuerzo"></svg></div>
+          <div class="glass-card mini-distribution"><div class="card-heading"><span>HUELLA DE ESFUERZO</span><small id="distributionLabel">Moderada</small></div><svg id="paDistribution" viewBox="0 0 720 210" aria-label="Distribución del esfuerzo bajo la zapata"></svg></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 3. PESO PROPIO -->
+    <section class="screen" data-screen="2" aria-labelledby="depthHeading">
+      <div class="technical-layout">
+        <aside class="glass-card parameter-panel">
+          <div class="card-heading"><span>PARÁMETROS</span><small>Suelo homogéneo</small></div>
+          <div class="control-row"><label for="g">Peso unitario γ <output id="gOut">18.0 kN/m³</output></label><input id="g" type="range" min="14" max="22" step=".5" value="18"><div class="range-extremes"><span>14</span><span>22 kN/m³</span></div></div>
+          <div class="control-row"><label for="z">Profundidad z <output id="zOut">6.0 m</output></label><input id="z" type="range" min=".5" max="10" step=".5" value="6"><div class="range-extremes"><span>0.5</span><span>10 m</span></div></div>
+          <div class="calculation-box"><span>ESFUERZO VERTICAL EN z</span><div>σᵥ = <b id="gCalc">18.0</b> × <b id="zCalc">6.0</b></div><strong id="svOut">108.0 kPa</strong><p>El punto soporta el peso de toda la columna de suelo situada encima.</p></div>
+          <button class="secondary-btn" id="animateColumnBtn">▶ Animar columna de suelo</button>
+        </aside>
+
+        <article class="glass-card technical-visual">
+          <div class="technical-heading"><div><span class="section-kicker">3. PESO PROPIO</span><h2 id="depthHeading">El suelo soporta su propio peso</h2><p>En un material homogéneo, el esfuerzo vertical aumenta linealmente con la profundidad.</p></div><div class="equation-chip">σᵥ = γz</div></div>
+          <div class="dual-graphic">
+            <svg id="soilColumnSvg" viewBox="0 0 430 620" aria-label="Columna realista de suelo homogéneo"></svg>
+            <svg id="chartDepth" viewBox="0 0 650 620" aria-label="Perfil de esfuerzo vertical con la profundidad"></svg>
+          </div>
+          <div class="reading-banner"><span>▣</span><p><b>Lectura de la gráfica:</b> la pendiente del perfil es γ. Un suelo más pesado produce un incremento más rápido del esfuerzo con la profundidad.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. SUELO ESTRATIFICADO -->
+    <section class="screen" data-screen="3" aria-labelledby="layersHeading">
+      <div class="technical-layout layers-layout">
+        <aside class="glass-card parameter-panel">
+          <div class="card-heading"><span>CONFIGURACIÓN DEL TERRENO</span><small>2 estratos</small></div>
+          <div class="control-row"><label for="qLayer">Sobrecarga q <output id="qLayerOut">60 kPa</output></label><input id="qLayer" type="range" min="0" max="150" step="5" value="60"></div>
+          <div class="control-row"><label for="h1">Espesor capa 1, h₁ <output id="h1Out">2.0 m</output></label><input id="h1" type="range" min=".5" max="5" step=".5" value="2"></div>
+          <div class="control-row"><label for="g1">Peso unitario γ₁ <output id="g1Out">17.0 kN/m³</output></label><input id="g1" type="range" min="14" max="22" step=".5" value="17"></div>
+          <div class="control-row"><label for="h2">Espesor capa 2, h₂ <output id="h2Out">3.0 m</output></label><input id="h2" type="range" min=".5" max="5" step=".5" value="3"></div>
+          <div class="control-row"><label for="g2">Peso unitario γ₂ <output id="g2Out">19.0 kN/m³</output></label><input id="g2" type="range" min="14" max="22" step=".5" value="19"></div>
+          <div class="layer-summary"><div><span>Sobrecarga</span><strong id="layerQSummary">60.0 kPa</strong></div><div><span>Peso del suelo</span><strong id="layerSoilSummary">91.0 kPa</strong></div><div class="total"><span>Esfuerzo total</span><strong id="layerTotalOut">151.0 kPa</strong></div></div>
+        </aside>
+
+        <article class="glass-card technical-visual">
+          <div class="technical-heading"><div><span class="section-kicker">4. SUELO ESTRATIFICADO</span><h2 id="layersHeading">Cada capa aporta parte del esfuerzo</h2><p>El esfuerzo es continuo; la pendiente cambia cuando cambia el peso unitario del material.</p></div><div class="equation-chip">σᵥ = q + Σγᵢhᵢ</div></div>
+          <div class="dual-graphic layer-dual">
+            <svg id="layerColumnSvg" viewBox="0 0 470 620" aria-label="Perfil realista de suelo estratificado"></svg>
+            <svg id="chartLayers" viewBox="0 0 650 620" aria-label="Perfil de esfuerzo por capas"></svg>
+          </div>
+          <div class="contribution-row"><div><span>Capa 1</span><strong id="layer1Out">34.0 kPa</strong></div><div><span>Capa 2</span><strong id="layer2Out">57.0 kPa</strong></div><div><span>Total en z</span><strong id="layerPointOut">151.0 kPa</strong></div></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5. SOBRECARGA -->
+    <section class="screen" data-screen="4" aria-labelledby="qHeading">
+      <div class="technical-layout overload-layout">
+        <aside class="glass-card parameter-panel">
+          <div class="card-heading"><span>SOBRECARGA SUPERFICIAL</span><small>Perfil desplazado</small></div>
+          <div class="control-row"><label for="q">Sobrecarga q <output id="qOut">60 kPa</output></label><input id="q" type="range" min="0" max="180" step="5" value="60"><div class="range-extremes"><span>0</span><span>180 kPa</span></div></div>
+          <div class="control-row"><label for="qGamma">Peso unitario γ <output id="qGammaOut">18.0 kN/m³</output></label><input id="qGamma" type="range" min="14" max="22" step=".5" value="18"></div>
+          <div class="control-row"><label for="qDepth">Profundidad z <output id="qDepthOut">5.0 m</output></label><input id="qDepth" type="range" min=".5" max="10" step=".5" value="5"></div>
+          <div class="calculation-box"><span>ESFUERZO TOTAL EN z</span><div>σᵥ = q + γz</div><strong id="qTotalOut">150.0 kPa</strong><p id="qInterpretation">60 kPa provienen de la carga superficial y 90 kPa del peso del suelo.</p></div>
+        </aside>
+
+        <article class="glass-card technical-visual">
+          <div class="technical-heading"><div><span class="section-kicker">5. SOBRECARGA SUPERFICIAL</span><h2 id="qHeading">La sobrecarga desplaza el perfil completo</h2><p>La carga superficial actúa desde z = 0 y se suma al peso propio en toda la profundidad analizada.</p></div><div class="equation-chip">σᵥ = q + γz</div></div>
+          <div class="dual-graphic overload-dual">
+            <svg id="overloadSceneSvg" viewBox="0 0 430 620" aria-label="Terreno con sobrecarga superficial"></svg>
+            <svg id="chartQ" viewBox="0 0 670 620" aria-label="Comparación de perfiles con y sin sobrecarga"></svg>
+          </div>
+          <div class="reading-banner"><span>↔</span><p><b>Observa:</b> las dos rectas tienen la misma pendiente γ. La sobrecarga no cambia γ; desplaza el perfil una cantidad q hacia la derecha.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6. EJEMPLOS GUIADOS -->
+    <section class="screen" data-screen="5" aria-labelledby="examplesHeading">
+      <div class="guided-layout">
+        <header class="guided-header"><div><span class="section-kicker">6. CIERRE GUIADO</span><h2 id="examplesHeading">Del perfil al resultado y del resultado a la interpretación</h2><p>Un cálculo geotécnico no termina en el número: identifica qué contribuye y explica su significado físico.</p></div><div class="method-flow"><span>1 Identificar</span><i>→</i><span>2 Sustituir</span><i>→</i><span>3 Calcular</span><i>→</i><span>4 Interpretar</span></div></header>
+        <div class="guided-grid" id="guidedExamples"></div>
+        <div class="challenge-card">
+          <div><span class="challenge-label">RETO FINAL</span><h3>¿Qué describe mejor el esfuerzo vertical total en un punto?</h3></div>
+          <div class="challenge-options" id="challengeOptions">
+            <button data-correct="false">A. La fuerza total dividida entre el volumen de suelo.</button>
+            <button data-correct="true">B. La suma de las presiones verticales originadas por las cargas y el peso propio situado encima del punto.</button>
+            <button data-correct="false">C. La resistencia máxima del suelo antes de fallar.</button>
+            <button data-correct="false">D. Un valor que solo depende de la profundidad.</button>
+          </div>
+          <div class="challenge-feedback" id="challengeFeedback">Selecciona una opción.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. MODELACIÓN -->
+    <section class="screen" data-screen="6" aria-labelledby="modelHeading">
+      <div class="model-layout">
+        <article class="glass-card model-problem">
+          <span class="section-kicker">7. ZONA DE MODELACIÓN</span>
+          <h2 id="modelHeading">Resuelve y verifica un caso de cimentación</h2>
+          <div class="problem-statement"><span class="problem-num">01</span><p>Una columna transmite <strong>900 kN</strong> a una zapata rectangular de <strong>3.0 m × 2.5 m</strong>. Determina el área y el esfuerzo promedio transmitido al terreno.</p></div>
+          <div class="model-steps">
+            <label><span>Paso 1 · Área calculada A (m²)</span><input id="answerArea" type="number" inputmode="decimal" step="0.1" placeholder="Ej. 7.5"></label>
+            <label><span>Paso 2 · Esfuerzo promedio σ (kPa)</span><input id="answerStress" type="number" inputmode="decimal" step="0.1" placeholder="Ej. 120"></label>
+            <button id="checkModel" class="primary-btn">Comprobar procedimiento</button>
+            <div id="modelFeedback" class="model-feedback" role="status"></div>
+          </div>
+          <div class="interpret-box"><span>INTERPRETACIÓN</span><p>Después de calcular, explica qué significa el resultado sobre cada metro cuadrado del terreno.</p></div>
+        </article>
+
+        <article class="glass-card model-canvas">
+          <div class="card-heading"><span>MODELO DE ZAPATA RECTANGULAR</span><small>Carga centrada</small></div>
+          <svg id="modelSvg" viewBox="0 0 900 620" aria-label="Modelo tridimensional simplificado de zapata rectangular"></svg>
+          <div class="model-data"><div><small>CARGA</small><strong>900 kN</strong></div><div><small>DIMENSIONES</small><strong>3.0 × 2.5 m</strong></div><div><small>RELACIÓN</small><strong>σ = P/A</strong></div></div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <button id="prevBtn" class="footer-btn">← Anterior</button>
+    <div id="dots" class="dots" aria-label="Progreso de pantallas"></div>
+    <button id="nextBtn" class="footer-btn primary">Siguiente →</button>
+  </footer>
+</div>
+
+<aside class="guide-drawer" id="guideDrawer" aria-hidden="true">
+  <div class="drawer-header"><div><span>GUÍA DOCENTE</span><h3 id="guideTitle">Introducción</h3></div><button class="icon-btn" id="guideClose" aria-label="Cerrar guía">×</button></div>
+  <div id="guideContent" class="guide-content"></div>
+</aside>
+<button class="drawer-backdrop" id="drawerBackdrop" aria-label="Cerrar guía"></button>
+
+<dialog id="objectivesDialog">
+  <div class="dialog-head"><div><span>CLASE 1</span><h3>Objetivos de aprendizaje</h3></div><button id="closeDialog" class="icon-btn" aria-label="Cerrar">×</button></div>
+  <div class="objective-list"><p><b>1.</b> Interpretar físicamente el esfuerzo vertical total.</p><p><b>2.</b> Relacionar carga, área y esfuerzo promedio.</p><p><b>3.</b> Calcular el aporte del peso propio, estratos y sobrecargas.</p><p><b>4.</b> Leer perfiles de esfuerzo y justificar cambios de pendiente.</p></div>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
